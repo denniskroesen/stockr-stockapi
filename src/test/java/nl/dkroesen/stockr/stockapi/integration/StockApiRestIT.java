@@ -1,4 +1,4 @@
-package nl.dkroesen.stockr.stockapi.restassured;
+package nl.dkroesen.stockr.stockapi.integration;
 
 import org.hamcrest.Matchers;
 import org.junit.Test;
@@ -8,6 +8,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import static io.restassured.RestAssured.get;
+import static org.hamcrest.Matchers.*;
 import static org.springframework.boot.test.context.SpringBootTest.WebEnvironment.RANDOM_PORT;
 
 @RunWith(SpringRunner.class)
@@ -23,9 +24,9 @@ public class StockApiRestIT {
                 .then()
                 .assertThat()
                 .statusCode(200)
-                .body("ticker", Matchers.equalTo("AAPL"))
+                .body("ticker", equalTo("AAPL"))
                 .and()
-                .body("companyName", Matchers.equalTo("Apple Inc."));
+                .body("companyName", equalTo("Apple Inc."));
     }
 
     @Test
@@ -34,9 +35,9 @@ public class StockApiRestIT {
                 .then()
                 .assertThat()
                 .statusCode(200)
-                .body("ticker", Matchers.equalTo(new String[]{ "AAPL", "NFLX" }))
+                .body("ticker", equalTo(new String[]{ "AAPL", "NFLX" }))
                 .and()
-                .body("companyName", Matchers.equalTo("Apple Inc."));
+                .body("companyName", equalTo("Apple Inc."));
     }
 
 
